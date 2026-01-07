@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "@google/genai": "^1.34.0",
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3",
+    "readline-sync": "^1.4.10"
+  },
+  "name": "ai-agent",
+  "version": "1.0.0",
+  "description": "Bulding a AI Agent having better capablilites than a pure LLM",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "aryan",
+  "license": "ISC"
+}
