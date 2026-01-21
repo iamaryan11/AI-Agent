@@ -58,7 +58,8 @@ const infoAbtWeather={
                 }
             }
 
-const tools={
+            // we need to wrap this inside the array (this was also the part of initial errors)
+const tools=[{
     
         functionDeclarations:[
            
@@ -66,7 +67,7 @@ const tools={
 
         ]
 }
-
+]
 
 const toolFunctions=
     {
@@ -76,17 +77,18 @@ const toolFunctions=
 
 const History=[]
 async function runOurAgent(){
-    console.log('ys budyyy')
+    console.log('runOurAgent function called')
     while(true){
-        console.log('yhn tk bhi sb thik hai')
         const result=await ai.models.generateContent({
             model:"gemini-2.5-flash",
             contents:History,
+            // config:[tools],
             config:{tools},
         })
-          console.log('yhn tk bhi sb chaanga siii')
+          console.log('All good till here')
+
         if(result.functionCalls&&result.functionCalls.length>0){
-            console.log('Yhn tk to ye pocha hi nhi')
+            console.log(' external tools are being called ')
             const functionCall=result.functionCalls[0];
             const {name,args}=functionCall;
             const response=await toolFunctions[name](args);
@@ -133,6 +135,8 @@ async function runOurAgent(){
                 parts:[{text:result.text}]
             })
             console.log(result.text)
+            // write break this was causing the second time run issuse
+            break;
         }
     }
 }
@@ -146,6 +150,5 @@ while(true){
         role:'user',
         parts:[{text:userQuestion}]
     })
-    console.log(History)
     await runOurAgent();
 }
